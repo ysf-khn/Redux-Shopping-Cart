@@ -2,7 +2,7 @@ import React from 'react';
 import { useSelector } from 'react-redux';
 import { Link, NavLink } from 'react-router-dom';
 
-const Header = () => {
+const Header = ({ query, setQuery }) => {
   const items = useSelector((state) => state.cart.items);
   console.log(items);
 
@@ -11,6 +11,13 @@ const Header = () => {
       <Link to='/' className=' text-xl font-bold'>
         React Shopper
       </Link>
+      <input
+        type='text'
+        className='p-1 bg-white rounded-lg'
+        value={query}
+        placeholder='Search items...'
+        onChange={(e) => setQuery(e.target.value)}
+      />
       <NavLink
         to='/cart'
         className={({ isActive }) =>

@@ -36,6 +36,7 @@ const Product = ({ id, title, img, rating, price }) => {
           <input
             type='number'
             value={quantity}
+            min='1'
             onChange={quantityHandler}
             className='bg-slate-200 rounded-md w-20 ml-2 p-1'
           />

@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { fetchProducts } from '../store/productSlice';
 import Product from './Product';
 
-const Products = () => {
+const Products = ({ query }) => {
   const dispatch = useDispatch();
   const {
     data: products,
@@ -22,16 +22,28 @@ const Products = () => {
   return (
     <ul className='grid grid-cols-3 lg:grid-cols-4 gap-3 m-3'>
       {!isLoading ? (
-        products.map((item) => (
-          <Product
-            key={item.id}
-            id={item.id}
-            title={item.title}
-            img={item.image}
-            rating={item.rating}
-            price={item.price}
-          />
-        ))
+        products
+          .filter((product) => {
+            if (query === '') {
+              return product;
+            } else if (
+              product.title.toLowerCase().includes(query.toLowerCase())
+            ) {
+              return product;
+            }
+            return 0;
+          })
+
+          .map((item) => (
+            <Product
+              key={item.id}
+              id={item.id}
+              title={item.title}
+              img={item.image}
+              rating={item.rating}
+              price={item.price}
+            />
+          ))
       ) : (
         <p>Loading...</p>
       )}
