@@ -32,7 +32,7 @@ const productSlice = createSlice({
 });
 
 export const fetchProducts = createAsyncThunk('products/fetch', async () => {
-  const res = await fetch('https://fakestoreapi.com/products');
+  const res = await fetch('https://fakestoreapi.com/products?limit=50');
   const data = await res.json();
   return data;
 });
