@@ -4,7 +4,7 @@ import { fetchProducts } from '../store/productSlice';
 import Pagination from './Pagination';
 import Product from './Product';
 
-const Products = ({ query }) => {
+const Products = ({ query, sliderValue }) => {
   const [currentPage, setCurrentpage] = useState(1);
   const [itemsPerPage] = useState(8);
   const dispatch = useDispatch();
@@ -35,20 +35,24 @@ const Products = ({ query }) => {
     );
   };
 
+  // item.price<=sliderValue
+
   return (
     <div>
       <ul className='grid grid-cols-3 lg:grid-cols-4 gap-3 m-3'>
         {!isLoading ? (
-          (query ? filterProducts(query) : currentItems).map((item) => (
-            <Product
-              key={item.id}
-              id={item.id}
-              title={item.title}
-              img={item.image}
-              rating={item.rating}
-              price={item.price}
-            />
-          ))
+          (query ? filterProducts(query) : currentItems).map((item) =>
+            item.price <= sliderValue ? (
+              <Product
+                key={item.id}
+                id={item.id}
+                title={item.title}
+                img={item.image}
+                rating={item.rating}
+                price={item.price}
+              />
+            ) : null
+          )
         ) : (
           <p>Loading...</p>
         )}

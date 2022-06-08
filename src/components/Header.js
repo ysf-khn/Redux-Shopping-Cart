@@ -13,7 +13,7 @@ const Header = ({ query, setQuery }) => {
       </Link>
       <input
         type='text'
-        className='p-1 bg-white rounded-lg'
+        className='p-1 bg-white rounded-md'
         value={query}
         placeholder='Search items...'
         onChange={(e) => setQuery(e.target.value)}
