@@ -5,17 +5,10 @@ import Header from './components/Header';
 import Products from './components/Products';
 import SortFilter from './components/SortFilter';
 
-const ratings = [
-  { aboveFour: false },
-  { aboveThree: false },
-  { aboveTwo: false },
-  { aboveOne: false },
-];
-
 function App() {
   const [query, setQuery] = useState('');
   const [sliderValue, setSliderValue] = useState(999);
-  const [rating, setRating] = useState(ratings);
+  const [sortValue, setSortValue] = useState('lowToHigh');
 
   return (
     <div className='App'>
@@ -23,14 +16,18 @@ function App() {
       <SortFilter
         sliderValue={sliderValue}
         setSliderValue={setSliderValue}
-        rating={rating}
-        setRating={setRating}
+        sortValue={sortValue}
+        setSortValue={setSortValue}
       />
       <Routes>
         <Route
           path='/'
           element={
-            <Products query={query} sliderValue={sliderValue} rating={rating} />
+            <Products
+              query={query}
+              sliderValue={sliderValue}
+              sortValue={sortValue}
+            />
           }
         />
         <Route path='/cart' element={<Cart />} />

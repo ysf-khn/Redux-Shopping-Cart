@@ -4,7 +4,7 @@ import { fetchProducts } from '../store/productSlice';
 import Pagination from './Pagination';
 import Product from './Product';
 
-const Products = ({ query, sliderValue }) => {
+const Products = ({ query, sliderValue, sortValue }) => {
   const [currentPage, setCurrentpage] = useState(1);
   const [itemsPerPage] = useState(8);
   const dispatch = useDispatch();
@@ -35,13 +35,17 @@ const Products = ({ query, sliderValue }) => {
     );
   };
 
-  // item.price<=sliderValue
+  const sortProducts = () =>
+    sortValue === 'lowToHigh'
+      ? currentItems.sort((a, b) => parseFloat(a.price) - parseFloat(b.price))
+      : currentItems.sort((a, b) => parseFloat(b.price) - parseFloat(a.price));
+  //  {sortValue==='highToLow'? sortProducts(products.sort(a,b)=>parseFloat(a.price)-parseFloat(b.price)):''}
 
   return (
     <div>
       <ul className='grid grid-cols-3 lg:grid-cols-4 gap-3 m-3'>
         {!isLoading ? (
-          (query ? filterProducts(query) : currentItems).map((item) =>
+          (query ? filterProducts(query) : sortProducts()).map((item) =>
             item.price <= sliderValue ? (
               <Product
                 key={item.id}
