@@ -4,10 +4,9 @@ import { Link, NavLink } from 'react-router-dom';
 
 const Header = ({ query, setQuery }) => {
   const items = useSelector((state) => state.cart.items);
-  console.log(items);
 
   return (
-    <nav className='px-12 py-4 bg-emerald-300 flex justify-between items-center shadow-lg'>
+    <nav className='p-3 flex gap-3 sm:px-12 sm:py-4 bg-emerald-300 sm:flex sm:justify-between sm:items-center shadow-lg'>
       <Link to='/' className=' text-xl font-bold'>
         React Shopper
       </Link>

@@ -10,11 +10,7 @@ const SortFilter = ({
   const [max, setMax] = useState(0);
   const [min, setMin] = useState(0);
 
-  const {
-    data: products,
-    isLoading,
-    error,
-  } = useSelector((state) => state.products);
+  const { data: products } = useSelector((state) => state.products);
 
   useEffect(() => {
     const prices = products.map((product) => product.price);
@@ -24,7 +20,6 @@ const SortFilter = ({
 
   const handleSliderChange = (e) => {
     setSliderValue(e.target.value);
-    console.log(sliderValue);
   };
 
   const isRadioSelected = (value) => sortValue === value;
@@ -32,9 +27,9 @@ const SortFilter = ({
   const handleSort = (e) => setSortValue(e.currentTarget.value);
 
   return (
-    <div className='bg-white p-4 flex justify-between'>
-      <div className='flex'>
-        <label>Price</label>
+    <div className='bg-white flex justify-center items-center gap-8 shadow-md py-4'>
+      <div>
+        <label>Price : </label>
         <input
           type='range'
           min={min}
@@ -54,7 +49,9 @@ const SortFilter = ({
             checked={isRadioSelected('lowToHigh')}
             onChange={handleSort}
           />
-          <label htmlFor='lowToHigh'>Low to High</label>
+          <label className='ml-1' htmlFor='lowToHigh'>
+            Low to High
+          </label>
         </div>
 
         <div>
@@ -66,12 +63,11 @@ const SortFilter = ({
             checked={isRadioSelected('highToLow')}
             onChange={handleSort}
           />
-          <label htmlFor='highToLow'>High to Low</label>
+          <label className='ml-1' htmlFor='highToLow'>
+            High to Low
+          </label>
         </div>
       </div>
-      <button className='bg-emerald-300 px-3 py-1 rounded-md'>
-        Clear Filters
-      </button>
     </div>
   );
 };

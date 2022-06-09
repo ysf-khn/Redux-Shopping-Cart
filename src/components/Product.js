@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { addToCart } from '../store/cartSlice';
+import toast, { Toaster } from 'react-hot-toast';
 
-const Product = ({ id, title, img, rating, price }) => {
+const Product = ({ id, title, img, price }) => {
   const dispatch = useDispatch();
   const [quantity, setQuantity] = useState(1);
 
@@ -11,6 +12,7 @@ const Product = ({ id, title, img, rating, price }) => {
   };
 
   const addToCartHandler = (e, id, title, price, quantity) => {
+    toast.success('Added to Cart');
     e.preventDefault();
     dispatch(addToCart({ id, title, price, quantity }));
   };
@@ -21,6 +23,7 @@ const Product = ({ id, title, img, rating, price }) => {
       className='bg-white px-6 py-4 rounded-md shadow-md flex flex-col justify-between'
     >
       <div>
+        <Toaster />
         <img src={img} alt='Item' className='max-h-40 mx-auto' />
         <h2 className='font-bold my-3'>{title}</h2>
         <h3 className='text-green-500 font-bold'>${price}</h3>
@@ -42,7 +45,7 @@ const Product = ({ id, title, img, rating, price }) => {
           />
         </div>
         <button
-          className='bg-emerald-300 px-3 py-1 mt-2 rounded-md ml-5 hover:bg-emerald-400'
+          className='bg-emerald-300 px-3 py-1 mt-2 rounded-md ml-5 font-semibold hover:bg-emerald-400'
           type='submit'
         >
           Add to Cart

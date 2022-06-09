@@ -11,28 +11,31 @@ function App() {
   const [sortValue, setSortValue] = useState('lowToHigh');
 
   return (
-    <div className='App'>
+    <>
       <Header query={query} setQuery={setQuery} />
-      <SortFilter
-        sliderValue={sliderValue}
-        setSliderValue={setSliderValue}
-        sortValue={sortValue}
-        setSortValue={setSortValue}
-      />
+
       <Routes>
         <Route
           path='/'
           element={
-            <Products
-              query={query}
-              sliderValue={sliderValue}
-              sortValue={sortValue}
-            />
+            <>
+              <SortFilter
+                sliderValue={sliderValue}
+                setSliderValue={setSliderValue}
+                sortValue={sortValue}
+                setSortValue={setSortValue}
+              />
+              <Products
+                query={query}
+                sliderValue={sliderValue}
+                sortValue={sortValue}
+              />
+            </>
           }
         />
         <Route path='/cart' element={<Cart />} />
       </Routes>
-    </div>
+    </>
   );
 }
 
